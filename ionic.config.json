@@ -1,0 +1,7 @@
+{
+  "name": "Managepad",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
