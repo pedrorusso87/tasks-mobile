@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
-import { DataService, Message } from '../services/data.service';
-
+import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { TaskService, Task } from '../services/task-service';
+import * as fromHome from './store/home-actions';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
-  constructor(private data: DataService) {}
+export class HomePage implements OnInit {
+  constructor(private taskService: TaskService, private store: Store) {}
 
   refresh(ev) {
     setTimeout(() => {
@@ -15,8 +16,11 @@ export class HomePage {
     }, 3000);
   }
 
-  getMessages(): Message[] {
-    return this.data.getMessages();
+  ngOnInit(): void {
+    this.store.dispatch(new fromHome.GetTasks());
   }
 
+  getMessages() {
+    //return this.taskService.getTasks();
+  }
 }
