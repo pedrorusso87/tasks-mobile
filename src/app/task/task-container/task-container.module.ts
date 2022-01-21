@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
-
-import { MessageComponent } from './message.component';
+import { TaskContainerComponent } from './task-container.component';
 
 @NgModule({
-  imports: [ CommonModule, FormsModule, IonicModule, RouterModule],
-  declarations: [MessageComponent],
-  exports: [MessageComponent]
+  imports: [ CommonModule, IonicModule, RouterModule],
+  declarations: [TaskContainerComponent],
+  exports: [TaskContainerComponent]
 })
-export class MessageComponentModule {}
+export class TaskContainerModule {}

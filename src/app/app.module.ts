@@ -10,6 +10,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
+import { TaskContainerModule } from './task/task-container/task-container.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
+    TaskContainerModule,
     StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),

@@ -1,0 +1,11 @@
+<ion-list>
+  <ion-item button>
+    <ion-avatar slot="start">
+      <img src="../../../assets/avatar-frodo.jpg" />
+    </ion-avatar>
+    <ion-label>
+      <h2>{{task.description}}</h2>
+      <p>Fecha de vencimiento: {{getFormattedDate(task.dueDate)}} </p>
+    </ion-label>
+  </ion-item>
+</ion-list>
