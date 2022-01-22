@@ -8,12 +8,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TaskDetailPage implements OnInit {
 
+  createdDate: string;
+  dueDate: string;
+  owner: string;
+  description: string;
+  pending = true;
+
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    console.log('adasdsad');
-    const task = (this.route.snapshot.queryParamMap.get('createdDate'));
-    console.log(task);
+    this.createdDate = (this.route.snapshot.queryParamMap.get('createdDate'));
+    this.description = (this.route.snapshot.queryParamMap.get('description'));
+    this.dueDate = (this.route.snapshot.queryParamMap.get('dueDate'));
+    this.owner = (this.route.snapshot.queryParamMap.get('owner'));
+    this.pending = false;
   }
 
 }
