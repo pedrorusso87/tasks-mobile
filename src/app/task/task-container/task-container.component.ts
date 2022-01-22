@@ -22,7 +22,9 @@ export class TaskContainerComponent implements OnInit {
   onTaskClicked() {
     const extras: NavigationExtras = {
       queryParams: {
-        createdDate: moment(this.task.createdDate).format('MM/DD/YYYY')
+        createdDate: moment(this.task.createdDate).format('MM/DD/YYYY'),
+        dueDate: moment(this.task.createdDate).format('MM/DD/YYYY'),
+        owner: this.task.owner
       }
     };
     this.router.navigate(['/task-detail'], extras);

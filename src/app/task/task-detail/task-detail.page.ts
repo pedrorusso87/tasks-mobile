@@ -12,8 +12,8 @@ export class TaskDetailPage implements OnInit {
 
   ngOnInit() {
     console.log('adasdsad');
-    const taks = (this.route.snapshot.queryParamMap.get('createdDate'));
-    console.log(taks);
+    const task = (this.route.snapshot.queryParamMap.get('createdDate'));
+    console.log(task);
   }
 
 }
