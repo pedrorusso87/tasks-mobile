@@ -18,6 +18,6 @@ export class TaskService {
   constructor(private httpClient: HttpClient) {}
 
   public getTasks(): Observable<any> {
-    return this.httpClient.get(`${this.url}/task/all`);
+    return this.httpClient.get(`${this.url}/tasks`);
   }
 }

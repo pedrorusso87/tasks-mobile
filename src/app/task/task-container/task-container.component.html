@@ -1,11 +1,16 @@
-<ion-list>
-  <ion-item button (click)="onTaskClicked()">
+<ion-content *ngIf="loading">
+  <div class="ion-text-center spinner-div">
+    <ion-spinner class="spinner"></ion-spinner>
+  </div>
+</ion-content>
+<ion-list *ngIf="!loading">
+  <ion-item button (click)="onTaskClicked(task)" *ngFor="let task of tasks">
     <ion-avatar slot="start">
       <img src="../../../assets/avatar-frodo.jpg" />
     </ion-avatar>
     <ion-label>
-      <h2>{{task.description}}</h2>
-      <p>Fecha de vencimiento: {{getFormattedDate(task.dueDate)}} </p>
+      <h2>{{ task.description }}</h2>
+      <p>Fecha de vencimiento: {{ getFormattedDate(task.dueDate) }}</p>
     </ion-label>
   </ion-item>
 </ion-list>

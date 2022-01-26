@@ -13,7 +13,7 @@ export class HomePage implements OnInit {
     description: 'sarasa',
     createdDate: moment().toDate(),
     dueDate: moment().toDate(),
-    owner: 'asdk'
+    owner: 'asdk',
   };
   constructor(private taskService: TaskService, private store: Store) {}
 
@@ -24,11 +24,6 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.store.dispatch(new fromHome.GetTasks());
-  }
-
-  getMessages() {
-    //return this.taskService.getTasks();
   }
 }
