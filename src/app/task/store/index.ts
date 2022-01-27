@@ -1,3 +1,3 @@
 export * from './reducers';
-export * from './home-actions';
+export * from './task-actions';
 export * from './effects';

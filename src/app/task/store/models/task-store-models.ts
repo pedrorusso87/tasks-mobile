@@ -1,6 +1,6 @@
 import { Task } from 'src/app/services/task-service';
 
-export class HomeState {
+export class TaskState {
   pending: boolean;
   error: null;
   tasks: Task[];

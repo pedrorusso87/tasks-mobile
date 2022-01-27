@@ -1,8 +1,7 @@
-import * as fromHome from '../home-actions';
-import { from } from 'rxjs';
-import { HomeState } from '../models/home-store-models';
+import * as fromTask from '../task-actions';
+import { TaskState } from '../models/task-store-models';
 
-const initialState: HomeState = {
+const initialState: TaskState = {
   pending: false,
   error: null,
   tasks: null,
@@ -10,16 +9,16 @@ const initialState: HomeState = {
 
 export const reducer = (
   state = initialState,
-  action: fromHome.TasksActions
-): HomeState => {
+  action: fromTask.TasksActions
+): TaskState => {
   switch (action.type) {
-    case fromHome.GET_TASKS: {
+    case fromTask.GET_TASKS: {
       return {
         ...state,
         pending: true,
       };
     }
-    case fromHome.GET_TASKS_SUCCESS: {
+    case fromTask.GET_TASKS_SUCCESS: {
       return {
         ...state,
         pending: false,
@@ -27,7 +26,7 @@ export const reducer = (
         tasks: action.payload,
       };
     }
-    case fromHome.GET_TASKS_FAILED: {
+    case fromTask.GET_TASKS_FAILED: {
       return {
         ...state,
         pending: false,

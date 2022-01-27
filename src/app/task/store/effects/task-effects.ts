@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { ofType, createEffect, Actions } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import * as homeActions from '../home-actions';
+import * as homeActions from '../task-actions';
 import { TaskService } from 'src/app/services/task-service';
 
 @Injectable()
-export default class HomeEffects {
+export default class TaskEffects {
   getTasks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(homeActions.GET_TASKS),

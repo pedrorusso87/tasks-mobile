@@ -3,7 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { Task } from 'src/app/services/task-service';
-import * as fromTasks from '../../home/store/index';
+import * as fromTasks from '../../task/store/index';
 @Component({
   selector: 'app-task-container',
   templateUrl: './task-container.component.html',

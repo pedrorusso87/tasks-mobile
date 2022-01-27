@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tareas </ion-title>
+    <ion-buttons>
+      <ion-menu-button></ion-menu-button>
+      <ion-title> Tareas </ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,8 +17,11 @@
       <ion-title size="large"> Tareas </ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <ion-list>
-    <app-task-container></app-task-container>
-  </ion-list>
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <app-task-container></app-task-container>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
