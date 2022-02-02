@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-task-detail',
@@ -14,7 +16,11 @@ export class TaskDetailPage implements OnInit {
   pending = true;
   status: string;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(
+    private route: ActivatedRoute,
+    private alertController: AlertController,
+    private store: Store
+  ) {}
 
   ngOnInit() {
     this.createdDate = this.route.snapshot.queryParamMap.get('createdDate');
@@ -25,5 +31,25 @@ export class TaskDetailPage implements OnInit {
     this.pending = false;
   }
 
-  deleteTask() {}
+  async deleteTask() {
+    const alert = await this.alertController.create({
+      message: '¿Está seguro de querer eliminar esta tarea?',
+      buttons: [
+        {
+          text: 'Volver',
+          role: 'cancel',
+          cssClass: 'secondary',
+          id: 'cancel-button',
+        },
+        {
+          text: 'Eliminar',
+          id: 'delete-button',
+          handler: () => {
+            console.log('Confirm Okay');
+          },
+        },
+      ],
+    });
+    await alert.present();
+  }
 }

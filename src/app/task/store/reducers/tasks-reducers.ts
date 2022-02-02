@@ -5,6 +5,7 @@ const initialState: TaskState = {
   pending: {
     getTasks: false,
     addTask: false,
+    deleteTask: false,
   },
   error: null,
   tasks: null,
@@ -53,6 +54,25 @@ export const reducer = (
       return {
         ...state,
         pending: { ...state.pending, getTasks: false },
+        error: action.payload,
+      };
+    }
+    case fromTask.DELETE_TASK: {
+      return {
+        ...state,
+        pending: { ...state.pending, deleteTask: true },
+      };
+    }
+    case fromTask.DELETE_TASK_SUCCESS: {
+      return {
+        ...state,
+        pending: { ...state.pending, deleteTask: false },
+      };
+    }
+    case fromTask.DELETE_TASK_FAILED: {
+      return {
+        ...state,
+        pending: { ...state.pending, deleteTask: false },
         error: action.payload,
       };
     }

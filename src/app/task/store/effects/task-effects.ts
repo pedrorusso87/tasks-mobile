@@ -31,5 +31,17 @@ export default class TaskEffects {
     )
   );
 
+  deleteTask$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(taskActions.ADD_TASK),
+      switchMap((data: any) =>
+        this.taskService.addTask(data.payload).pipe(
+          map((response) => new taskActions.AddTaskSuccess(response)),
+          catchError((e) => of(new taskActions.AddTaskFailed(e)))
+        )
+      )
+    )
+  );
+
   constructor(private actions$: Actions, private taskService: TaskService) {}
 }

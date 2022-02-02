@@ -25,4 +25,8 @@ export class TaskService {
   public addTask(task: AddTaskRequest): Observable<any> {
     return this.httpClient.post(`${this.url}/tasks`, task);
   }
+
+  public deleteTask(taskId: string): Observable<any> {
+    return this.httpClient.delete(`${this.url}/tasks/${taskId}`);
+  }
 }

@@ -11,6 +11,11 @@ export const GET_TASKS_FAILED = '[TASKS] get tasks failed';
 export const ADD_TASK = '[TASKS] add task';
 export const ADD_TASK_SUCCESS = '[TASKS] add task success';
 export const ADD_TASK_FAILED = '[TASKS] add task failed';
+
+//Delete Task
+export const DELETE_TASK = '[TASKS] delete task';
+export const DELETE_TASK_SUCCESS = '[TASKS] delete task success';
+export const DELETE_TASK_FAILED = '[TASKS] delete task failed';
 export class GetTasks implements Action {
   readonly type = GET_TASKS;
   constructor() {}
@@ -35,6 +40,18 @@ export class AddTaskFailed implements Action {
   readonly type = ADD_TASK_FAILED;
   constructor(public payload: any) {}
 }
+export class DeleteTask implements Action {
+  readonly type = DELETE_TASK;
+  constructor(public payload: AddTaskRequest) {}
+}
+export class DeleteTaskSuccess implements Action {
+  readonly type = DELETE_TASK_SUCCESS;
+  constructor(public payload: any) {}
+}
+export class DeleteTaskFailed implements Action {
+  readonly type = DELETE_TASK_FAILED;
+  constructor(public payload: any) {}
+}
 // action types
 export type TasksActions =
   | GetTasks
@@ -42,4 +59,7 @@ export type TasksActions =
   | GetTasksFailed
   | AddTask
   | AddTaskSuccess
-  | AddTaskFailed;
+  | AddTaskFailed
+  | DeleteTask
+  | DeleteTaskSuccess
+  | DeleteTaskFailed;
