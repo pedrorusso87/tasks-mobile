@@ -4,6 +4,10 @@ import * as moment from 'moment';
 import { AddTaskRequest } from '../models/task-model';
 import * as fromTasks from '../store';
 import * as fromPriorities from '../../priorities/store';
+import {
+  PrioritiesResponse,
+  Priority,
+} from 'src/app/priorities/models/priorities-model';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.page.html',
@@ -11,11 +15,22 @@ import * as fromPriorities from '../../priorities/store';
 })
 export class AddTaskPage implements OnInit {
   today = moment().format('YYYY-MM-DD');
+  getPrioritiesPending$ = this.store.select(
+    fromPriorities.getPrioritiesPending
+  );
+  getPriorities$ = this.store.select(fromPriorities.getPriorities);
+  priorities: PrioritiesResponse;
   constructor(private store: Store) {}
 
   ngOnInit() {
-    console.log(this.today);
     this.store.dispatch(new fromPriorities.GetPriorities());
+    this.getPrioritiesPending$.subscribe((pending) => {
+      if (!pending) {
+        this.getPriorities$.subscribe((response) => {
+          this.priorities = response;
+        });
+      }
+    });
   }
 
   addTask() {

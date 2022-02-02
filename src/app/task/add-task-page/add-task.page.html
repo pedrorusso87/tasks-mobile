@@ -8,7 +8,10 @@
 </ion-header>
 <!-- Make icon colors change from medium to primary when value is selected -->
 <ion-content [fullscreen]="true">
-  <ion-card>
+  <div class="spinner" *ngIf="getPrioritiesPending$ | async">
+    <ion-spinner name="lines" color="primary"></ion-spinner>
+  </div>
+  <ion-card *ngIf="getPriorities$ | async">
     <ion-card-content>
       <ion-item>
         <ion-icon
@@ -35,6 +38,22 @@
           <ion-select-option value="05">Smashing Pumpkins</ion-select-option>
           <ion-select-option value="06">Soundgarden</ion-select-option>
           <ion-select-option value="07">Stone Temple Pilots</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-icon
+          name="expand"
+          slot="start"
+          class="ion-padding-top"
+          color="medium"
+        ></ion-icon>
+        <ion-label position="stacked">Prioridad</ion-label>
+        <ion-select>
+          <ion-select-option
+            *ngFor="let priority of priorities"
+            [value]="priority.id"
+            >{{priority.description}}</ion-select-option
+          >
         </ion-select>
       </ion-item>
       <ion-item id="open-modal" class="ion-padding-bottom" lines="none">

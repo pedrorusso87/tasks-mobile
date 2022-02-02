@@ -29,7 +29,8 @@ export class TaskContainerComponent implements OnInit {
   }
 
   getFormattedDate(date: Date) {
-    return moment(date).format('DD-MM-YY');
+    //this seems odd, it is to suppress a deprecation warning thrown by moment
+    return moment(date, 'DD-MM-YY').format('DD-MM-YY');
   }
 
   onTaskClicked(task) {
