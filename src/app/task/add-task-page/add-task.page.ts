@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { AddTaskRequest } from '../models/task-model';
 import * as fromTasks from '../store';
+import * as fromPriorities from '../../priorities/store';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.page.html',
@@ -14,6 +15,7 @@ export class AddTaskPage implements OnInit {
 
   ngOnInit() {
     console.log(this.today);
+    this.store.dispatch(new fromPriorities.GetPriorities());
   }
 
   addTask() {

@@ -19,7 +19,7 @@ import { TaskContainerModule } from '../task-container/task-container.module';
     IonicModule,
     TaskPageRoutingModule,
     TaskContainerModule,
-    StoreModule.forFeature('tasks', reducers),
+    StoreModule.forFeature('tasksState', reducers),
     EffectsModule.forFeature(effects),
   ],
   declarations: [TaskPage],
