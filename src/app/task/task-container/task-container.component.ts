@@ -43,6 +43,7 @@ export class TaskContainerComponent implements OnInit {
         description: task.description,
         status: task.status.description,
         priority: task.priority.description,
+        taskId: task.id,
       },
     };
     this.router.navigate(['/task-detail'], extras);

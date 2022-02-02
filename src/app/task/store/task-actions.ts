@@ -42,7 +42,7 @@ export class AddTaskFailed implements Action {
 }
 export class DeleteTask implements Action {
   readonly type = DELETE_TASK;
-  constructor(public payload: AddTaskRequest) {}
+  constructor(public payload: string) {}
 }
 export class DeleteTaskSuccess implements Action {
   readonly type = DELETE_TASK_SUCCESS;

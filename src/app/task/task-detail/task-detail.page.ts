@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
+import * as fromTasks from '../store';
 
 @Component({
   selector: 'app-task-detail',
@@ -15,6 +16,7 @@ export class TaskDetailPage implements OnInit {
   description: string;
   pending = true;
   status: string;
+  taskId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class TaskDetailPage implements OnInit {
     this.dueDate = this.route.snapshot.queryParamMap.get('dueDate');
     this.owner = this.route.snapshot.queryParamMap.get('owner');
     this.status = this.route.snapshot.queryParamMap.get('status');
+    this.taskId = this.route.snapshot.queryParamMap.get('taskId');
     this.pending = false;
   }
 
@@ -45,7 +48,8 @@ export class TaskDetailPage implements OnInit {
           text: 'Eliminar',
           id: 'delete-button',
           handler: () => {
-            console.log('Confirm Okay');
+            // TODO: This is just a test, in the future we might not want to pass the id of the task
+            this.store.dispatch(new fromTasks.DeleteTask(this.taskId));
           },
         },
       ],
