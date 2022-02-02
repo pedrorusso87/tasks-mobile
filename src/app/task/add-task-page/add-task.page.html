@@ -6,7 +6,7 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<!-- Make icon colors change when value is selected -->
+<!-- Make icon colors change from medium to primary when value is selected -->
 <ion-content [fullscreen]="true">
   <ion-card>
     <ion-card-content>
@@ -15,16 +15,16 @@
           name="document"
           slot="start"
           class="ion-padding-top"
-          color="primary"
+          color="medium"
         ></ion-icon>
-        <ion-input type="text" required placeholder="Titulo"></ion-input>
+        <ion-input type="text" required placeholder="Descripcion"></ion-input>
       </ion-item>
       <ion-item>
         <ion-icon
           name="person"
           slot="start"
           class="ion-padding-top"
-          color="primary"
+          color="medium"
         ></ion-icon>
         <ion-label position="stacked">Responsable</ion-label>
         <ion-select value="03">
@@ -41,7 +41,7 @@
         <ion-icon
           icon="calendar-outline"
           slot="start"
-          color="primary"
+          color="medium"
         ></ion-icon>
         <ion-label>Fecha de Finalizacion</ion-label>
       </ion-item>
@@ -51,6 +51,7 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
+  <ion-button expand="block" (click)="addTask()">Agregar Tarea</ion-button>
 </ion-content>
 <ion-modal trigger="open-modal">
   <ng-template>

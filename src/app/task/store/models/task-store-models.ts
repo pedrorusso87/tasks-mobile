@@ -1,7 +1,10 @@
 import { Task } from 'src/app/services/task-service';
 
 export class TaskState {
-  pending: boolean;
+  pending: {
+    getTasks: boolean;
+    addTask: boolean;
+  };
   error: null;
   tasks: Task[];
 }

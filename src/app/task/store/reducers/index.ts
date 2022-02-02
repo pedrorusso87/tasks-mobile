@@ -3,7 +3,7 @@ import {
   createFeatureSelector,
   createSelector,
 } from '@ngrx/store';
-import * as fromHome from './home-reducers';
+import * as fromHome from './tasks-reducers';
 import { TaskState } from '../models/task-store-models';
 import { TasksActions } from '../task-actions';
 
