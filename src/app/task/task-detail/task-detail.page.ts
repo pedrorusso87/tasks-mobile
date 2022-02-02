@@ -7,21 +7,23 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./task-detail.page.scss'],
 })
 export class TaskDetailPage implements OnInit {
-
   createdDate: string;
   dueDate: string;
   owner: string;
   description: string;
   pending = true;
+  status: string;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.createdDate = (this.route.snapshot.queryParamMap.get('createdDate'));
-    this.description = (this.route.snapshot.queryParamMap.get('description'));
-    this.dueDate = (this.route.snapshot.queryParamMap.get('dueDate'));
-    this.owner = (this.route.snapshot.queryParamMap.get('owner'));
+    this.createdDate = this.route.snapshot.queryParamMap.get('createdDate');
+    this.description = this.route.snapshot.queryParamMap.get('description');
+    this.dueDate = this.route.snapshot.queryParamMap.get('dueDate');
+    this.owner = this.route.snapshot.queryParamMap.get('owner');
+    this.status = this.route.snapshot.queryParamMap.get('status');
     this.pending = false;
   }
 
+  deleteTask() {}
 }

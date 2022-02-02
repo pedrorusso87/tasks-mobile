@@ -25,10 +25,18 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+ion-content {
+  --background: #005f85;
+}
+
 ion-card {
   background-color: #f0f0f0;
 }
 
 ion-menu-button {
   color: var(--ion-color-secondary);
+}
+
+.ion-color-toolbar {
+  --ion-color-base: #e6e6e6 !important;
 }
