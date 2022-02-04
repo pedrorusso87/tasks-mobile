@@ -10,9 +10,9 @@ import { TaskPage } from './task.page';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from '../store';
-import { TaskContainerModule } from '../task-container/task-container.module';
+/*import { TaskContainerModule } from '../task-container/task-container.module';
 
-@NgModule({
+/*@NgModule({
   imports: [
     CommonModule,
     FormsModule,
@@ -25,3 +25,4 @@ import { TaskContainerModule } from '../task-container/task-container.module';
   declarations: [TaskPage],
 })
 export class TaskPageModule {}
+*/

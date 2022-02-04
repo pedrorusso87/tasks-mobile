@@ -4,33 +4,35 @@ import {
   createSelector,
 } from '@ngrx/store';
 import * as fromTask from './tasks-reducers';
-import { TaskState } from '../models/task-store-models';
-import { TasksActions } from '../task-actions';
+import * as fromRoot from '../../../reducers';
 
-export interface TaskPageState {
-  getTasks: TaskState;
+export interface TaskState {
+  tasksState: fromTask.State;
+}
+export interface State extends fromRoot.State {
+  tasks: TaskState;
 }
 
-export const reducers: ActionReducerMap<TaskPageState, TasksActions> = {
-  getTasks: fromTask.reducer,
+export const reducers: ActionReducerMap<TaskState> = {
+  tasksState: fromTask.reducer,
 };
 
-const tasksState = createFeatureSelector<TaskPageState>('tasksState');
+const selectTask = createFeatureSelector<TaskState>('tasks');
 
-export const getTasksState = createSelector(
-  tasksState,
-  (state: TaskPageState) => state.getTasks
+export const selectTaskState = createSelector(
+  selectTask,
+  (state: TaskState) => state.tasksState
 );
 
-export const getTasksPending = createSelector(
-  getTasksState,
-  (state: TaskState) => state.pending.getTasks
+export const selectGetTasksPending = createSelector(
+  selectTaskState,
+  (state) => state.pending.getTasks
 );
-export const getTasks = createSelector(
-  getTasksState,
-  (state: TaskState) => state.tasks
+export const selectGetTasksSuccess = createSelector(
+  selectTaskState,
+  (state) => state.tasks
 );
-export const getTasksError = createSelector(
-  getTasksState,
-  (state: TaskState) => state.error
+export const selectGetTasksError = createSelector(
+  selectTaskState,
+  (state) => state.error
 );

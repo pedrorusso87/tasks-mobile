@@ -5,9 +5,9 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TaskContainerComponent } from './task-container.component';
 
-@NgModule({
+/*@NgModule({
   imports: [CommonModule, IonicModule, RouterModule],
   declarations: [TaskContainerComponent],
   exports: [TaskContainerComponent],
 })
-export class TaskContainerModule {}
+export class TaskContainerModule {}*/

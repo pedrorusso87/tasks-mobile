@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromHome from '../store/task-actions';
+import * as fromHome from '../store/actions/task-actions';
 
 @Component({
   selector: 'app-task',
@@ -17,6 +17,6 @@ export class TaskPage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromHome.GetTasks());
+    this.store.dispatch(fromHome.getTasks());
   }
 }

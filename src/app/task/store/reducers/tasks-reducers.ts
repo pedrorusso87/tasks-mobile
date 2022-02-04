@@ -1,7 +1,17 @@
-import * as fromTask from '../task-actions';
-import { TaskState } from '../models/task-store-models';
+import { Action, createReducer, on } from '@ngrx/store';
+import { Task } from 'src/app/services/task-service';
+import { TaskActions } from '../actions';
+export interface State {
+  pending: {
+    getTasks: boolean;
+    addTask: boolean;
+    deleteTask: boolean;
+  };
+  error: null;
+  tasks: Task[];
+}
 
-const initialState: TaskState = {
+const initialState: State = {
   pending: {
     getTasks: false,
     addTask: false,
@@ -11,73 +21,51 @@ const initialState: TaskState = {
   tasks: null,
 };
 
-export const reducer = (
-  state = initialState,
-  action: fromTask.TasksActions
-): TaskState => {
-  switch (action.type) {
-    case fromTask.GET_TASKS: {
-      return {
-        ...state,
-        pending: { ...state.pending, getTasks: true },
-      };
-    }
-    case fromTask.GET_TASKS_SUCCESS: {
-      return {
-        ...state,
-        pending: { ...state.pending, getTasks: false },
-        error: null,
-        tasks: action.payload,
-      };
-    }
-    case fromTask.GET_TASKS_FAILED: {
-      return {
-        ...state,
-        pending: { ...state.pending, getTasks: false },
-        error: action.payload,
-      };
-    }
-    case fromTask.ADD_TASK: {
-      return {
-        ...state,
-        pending: { ...state.pending, addTask: true },
-      };
-    }
-    case fromTask.ADD_TASK_SUCCESS: {
-      return {
-        ...state,
-        pending: { ...state.pending, getTasks: false },
-        error: null,
-      };
-    }
-    case fromTask.ADD_TASK_FAILED: {
-      return {
-        ...state,
-        pending: { ...state.pending, getTasks: false },
-        error: action.payload,
-      };
-    }
-    case fromTask.DELETE_TASK: {
-      return {
-        ...state,
-        pending: { ...state.pending, deleteTask: true },
-      };
-    }
-    case fromTask.DELETE_TASK_SUCCESS: {
-      return {
-        ...state,
-        pending: { ...state.pending, deleteTask: false },
-      };
-    }
-    case fromTask.DELETE_TASK_FAILED: {
-      return {
-        ...state,
-        pending: { ...state.pending, deleteTask: false },
-        error: action.payload,
-      };
-    }
-    default: {
-      return { ...state };
-    }
-  }
-};
+const taskReducer = createReducer(
+  initialState,
+  on(TaskActions.getTasks, (state) => ({
+    ...state,
+    pending: { ...state.pending, getTasks: true },
+  })),
+  on(TaskActions.GetTasksSuccess, (state, { tasks }) => ({
+    ...state,
+    pending: { ...state.pending, getTasks: false },
+    error: null,
+    tasks,
+  })),
+  on(TaskActions.GetTasksFailed, (state, { error }) => ({
+    ...state,
+    pending: { ...state.pending, getTasks: false },
+    error,
+  })),
+  on(TaskActions.AddTask, (state) => ({
+    ...state,
+    pending: { ...state.pending, addTask: true },
+  })),
+  on(TaskActions.AddTaskSuccess, (state) => ({
+    ...state,
+    pending: { ...state.pending, addTask: false },
+  })),
+  on(TaskActions.AddTaskFailed, (state, { error }) => ({
+    ...state,
+    pending: { ...state.pending, addTask: false },
+    error,
+  })),
+  on(TaskActions.DeleteTask, (state) => ({
+    ...state,
+    pending: { ...state.pending, deleteTask: true },
+  })),
+  on(TaskActions.DeleteTaskSuccess, (state) => ({
+    ...state,
+    pending: { ...state.pending, deleteTask: false },
+  })),
+  on(TaskActions.DeleteTaskFailed, (state, { error }) => ({
+    ...state,
+    pending: { ...state.pending, deleteTask: false },
+    error,
+  }))
+);
+
+export function reducer(state: State | undefined, action: Action) {
+  return taskReducer(state, action);
+}

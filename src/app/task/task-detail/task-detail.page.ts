@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import * as fromTasks from '../store';
+import { TaskActions } from '../store/actions';
 
 @Component({
   selector: 'app-task-detail',
@@ -49,7 +50,9 @@ export class TaskDetailPage implements OnInit {
           id: 'delete-button',
           handler: () => {
             // TODO: This is just a test, in the future we might not want to pass the id of the task
-            this.store.dispatch(new fromTasks.DeleteTask(this.taskId));
+            this.store.dispatch(
+              TaskActions.DeleteTask({ payload: this.taskId })
+            );
           },
         },
       ],

@@ -10,8 +10,8 @@ import * as fromTasks from '../../task/store/index';
   styleUrls: ['./task-container.component.scss'],
 })
 export class TaskContainerComponent implements OnInit {
-  getTaskPending$ = this.store.select(fromTasks.getTasksPending);
-  getTasks$ = this.store.select(fromTasks.getTasks);
+  getTaskPending$ = this.store.select(fromTasks.selectGetTasksPending);
+  getTasks$ = this.store.select(fromTasks.selectGetTasksSuccess);
   loading = true;
   tasks: Task[];
 

@@ -3,14 +3,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+import { reducers, metaReducers } from './reducers';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
-import { TaskContainerModule } from './task/task-container/task-container.module';
+import { TaskModule } from './task/task.module';
+import { PrioritiesModule } from './priorities/priorities.module';
+//import { TaskContainerModule } from './task/task-container/task-container.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,9 +21,12 @@ import { TaskContainerModule } from './task/task-container/task-container.module
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    StoreModule.forRoot({}),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+    }),
     EffectsModule.forRoot([]),
-    TaskContainerModule,
+    PrioritiesModule,
+    TaskModule,
     StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),
