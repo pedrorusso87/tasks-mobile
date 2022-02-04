@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import * as fromTasks from '../store';
 import { TaskActions } from '../store/actions';
-
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.page.html',
