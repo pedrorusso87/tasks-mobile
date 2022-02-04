@@ -1,28 +1,27 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-import { StoreModule } from '@ngrx/store';
-import { provideMockStore, MockStore } from '@ngrx/store/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
+import { MockStore } from '@ngrx/store/testing';
 import { TaskPage } from './task.page';
+import * as fromTasks from 'src/app/task/store/reducers';
 
 describe('TaskPage', () => {
   let component: TaskPage;
   let fixture: ComponentFixture<TaskPage>;
-  let store: MockStore;
+  let spectator: Spectator<TaskPage>;
+  let mockStore: MockStore<fromTasks.State>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TaskPage],
-        imports: [IonicModule.forRoot(), StoreModule.forRoot({})],
-        providers: [provideMockStore({})],
-      }).compileComponents();
+  const createComponent = createComponentFactory({
+    component: TaskPage,
+    declarations: [TaskPage],
+  });
 
-      store = TestBed.inject(MockStore);
-      fixture = TestBed.createComponent(TaskPage);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    })
-  );
+  beforeEach(() => {
+    spectator = createComponent();
+    mockStore = spectator.inject(MockStore);
+    fixture = TestBed.createComponent(TaskPage);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -11,7 +11,7 @@ export interface PriorityState {
 }
 
 export interface State extends fromRoot.State {
-  tasks: PriorityState;
+  priorities: PriorityState;
 }
 
 export const reducers: ActionReducerMap<PriorityState> = {
