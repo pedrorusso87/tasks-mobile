@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ofType, createEffect, Actions } from '@ngrx/effects';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import * as prioritiesActions from '../priorities-actions';
+import * as prioritiesActions from '../actions/priorities-actions';
 import { PrioritiesService } from 'src/app/services/priorities-service';
 
 @Injectable()
@@ -10,13 +10,13 @@ export default class PrioritiesEffects {
   getPriorities$ = createEffect(() =>
     this.actions$.pipe(
       ofType(prioritiesActions.GET_PRIORITIES),
-      switchMap(() =>
+      mergeMap(() =>
         this.prioritiesService.getPriorities().pipe(
-          map(
-            (response) => new prioritiesActions.GetPrioritiesSuccess(response)
+          map((response) =>
+            prioritiesActions.GetPrioritiesSuccess({ priorities: response })
           ),
           catchError((error) =>
-            of(new prioritiesActions.GetPrioritiesFailed(error))
+            of(prioritiesActions.GetPrioritiesFailed({ error: error }))
           )
         )
       )

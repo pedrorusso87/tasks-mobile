@@ -1,40 +1,33 @@
-import { PrioritiesState } from '../../models/priorities-model';
-import * as fromPriorities from '../priorities-actions';
+import { Action, createReducer, on } from '@ngrx/store';
+import { PrioritiesResponse } from '../../models/priorities-model';
+import { PrioritiesActions } from '../actions';
 
-const initialState: PrioritiesState = {
+export interface State {
+  pending: boolean;
+  error: boolean;
+  priorities: PrioritiesResponse;
+}
+
+const initialState: State = {
   pending: false,
   error: null,
   priorities: null,
 };
 
-export const reducer = (
-  state = initialState,
-  action: fromPriorities.PrioritiesActions
-): PrioritiesState => {
-  switch (action.type) {
-    case fromPriorities.GET_PRIORITIES: {
-      return {
-        ...state,
-        pending: true,
-      };
-    }
-    case fromPriorities.GET_PRIORITIES_SUCCESS: {
-      return {
-        ...state,
-        pending: false,
-        error: null,
-        priorities: action.payload,
-      };
-    }
-    case fromPriorities.GET_PRIORITIES_FAILED: {
-      return {
-        ...state,
-        pending: false,
-        error: action.payload,
-      };
-    }
-    default: {
-      return { ...state };
-    }
-  }
-};
+const prioritiesReducer = createReducer(
+  initialState,
+  on(PrioritiesActions.GetPriorities, (state) => ({ ...state, pending: true })),
+  on(PrioritiesActions.GetPrioritiesSuccess, (state, { priorities }) => ({
+    ...state,
+    pending: false,
+    priorities,
+  })),
+  on(PrioritiesActions.GetPrioritiesFailed, (state, { error }) => ({
+    ...state,
+    pending: false,
+    error,
+  }))
+);
+export function reducer(state: State | undefined, action: Action) {
+  return prioritiesReducer(state, action);
+}

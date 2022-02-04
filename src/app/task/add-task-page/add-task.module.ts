@@ -11,7 +11,7 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects, reducers } from '../../priorities/store';
 
-@NgModule({
+/*@NgModule({
   imports: [
     CommonModule,
     FormsModule,
@@ -22,4 +22,4 @@ import { effects, reducers } from '../../priorities/store';
   ],
   declarations: [AddTaskPage],
 })
-export class AddTaskPageModule {}
+export class AddTaskPageModule {}*/

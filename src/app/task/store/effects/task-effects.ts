@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ofType, createEffect, Actions } from '@ngrx/effects';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import * as taskActions from '../task-actions';
+import * as taskActions from '../actions/task-actions';
 import { TaskService } from 'src/app/services/task-service';
 
 @Injectable()
@@ -12,8 +12,8 @@ export default class TaskEffects {
       ofType(taskActions.GET_TASKS),
       switchMap(() =>
         this.taskService.getTasks().pipe(
-          map((response) => new taskActions.GetTasksSuccess(response)),
-          catchError((error) => of(new taskActions.GetTasksFailed(error)))
+          map((response) => taskActions.GetTasksSuccess({ tasks: response })),
+          catchError((error) => of(taskActions.GetTasksFailed(error)))
         )
       )
     )
@@ -24,8 +24,8 @@ export default class TaskEffects {
       ofType(taskActions.ADD_TASK),
       switchMap((data: any) =>
         this.taskService.addTask(data.payload).pipe(
-          map((response) => new taskActions.AddTaskSuccess(response)),
-          catchError((e) => of(new taskActions.AddTaskFailed(e)))
+          map((response) => taskActions.AddTaskSuccess(response)),
+          catchError((e) => of(taskActions.AddTaskFailed(e)))
         )
       )
     )
@@ -36,8 +36,8 @@ export default class TaskEffects {
       ofType(taskActions.DELETE_TASK),
       switchMap((data: any) =>
         this.taskService.deleteTask(data.payload).pipe(
-          map((response) => new taskActions.AddTaskSuccess(response)),
-          catchError((e) => of(new taskActions.AddTaskFailed(e)))
+          map((response) => taskActions.AddTaskSuccess(response)),
+          catchError((e) => of(taskActions.AddTaskFailed(e)))
         )
       )
     )

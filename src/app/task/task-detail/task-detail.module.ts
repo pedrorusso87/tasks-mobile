@@ -8,7 +8,7 @@ import { TaskDetailPageRoutingModule } from './task-detail-routing.module';
 
 import { TaskDetailPage } from './task-detail.page';
 
-@NgModule({
+/*@NgModule({
   imports: [
     CommonModule,
     FormsModule,
@@ -18,3 +18,4 @@ import { TaskDetailPage } from './task-detail.page';
   declarations: [TaskDetailPage]
 })
 export class TaskDetailPageModule {}
+*/
