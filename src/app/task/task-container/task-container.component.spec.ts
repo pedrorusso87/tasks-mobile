@@ -1,31 +1,27 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { IonicModule } from '@ionic/angular';
-import { RouterTestingModule } from '@angular/router/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TaskContainerComponent } from './task-container.component';
-import { StoreModule } from '@ngrx/store';
-import { MockStore, provideMockStore } from '@ngrx/store/testing';
+import { MockStore } from '@ngrx/store/testing';
+import * as fromPriorities from 'src/app/task/store/reducers';
+import { createComponentFactory, Spectator } from '@ngneat/spectator';
 
-fdescribe('TaskContainerComponent', () => {
+describe('TaskContainerComponent', () => {
   let component: TaskContainerComponent;
   let fixture: ComponentFixture<TaskContainerComponent>;
+  let spectator: Spectator<TaskContainerComponent>;
+  let mockStore: MockStore<fromPriorities.State>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TaskContainerComponent],
-        imports: [
-          IonicModule.forRoot(),
-          RouterTestingModule,
-          StoreModule.forRoot({}),
-        ],
-        providers: [provideMockStore()],
-      }).compileComponents();
+  const createComponent = createComponentFactory({
+    component: TaskContainerComponent,
+    declarations: [TaskContainerComponent],
+  });
 
-      fixture = TestBed.createComponent(TaskContainerComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    })
-  );
+  beforeEach(() => {
+    spectator = createComponent();
+    mockStore = spectator.inject(MockStore);
+    fixture = TestBed.createComponent(TaskContainerComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

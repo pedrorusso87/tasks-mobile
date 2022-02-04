@@ -5,7 +5,6 @@ import {
 } from '@ngrx/store';
 import * as fromTask from './tasks-reducers';
 import * as fromRoot from '../../../reducers';
-
 export interface TaskState {
   tasksState: fromTask.State;
 }
