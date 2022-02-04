@@ -7,8 +7,8 @@ import {
   PrioritiesResponse,
   Priority,
 } from 'src/app/priorities/models/priorities-model';
-import { TaskActions } from '../store/actions';
 import { PrioritiesActions } from 'src/app/priorities/store/actions';
+import { TaskActions } from '../store/actions';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.page.html',
