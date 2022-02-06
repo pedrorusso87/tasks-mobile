@@ -8,52 +8,78 @@
 </ion-toolbar>
 
 <ion-content *ngIf="!pending">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title class="ion-text-center ion-margin-bottom"
-        >{{description}}</ion-card-title
-      >
-      <ion-card-subtitle> </ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <div class="ion-text-center">
-        <ion-label>Fecha de creacion</ion-label>
-      </div>
-      <ion-item class="ion-margin-bottom">
-        <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
-        <ion-input type="text" disabled>{{createdDate}}</ion-input>
-      </ion-item>
-      <div class="ion-text-center">
-        <ion-label>Fecha de vencimiento</ion-label>
-      </div>
-      <!-- Change calendar color if due date is greater than today -->
-      <ion-item class="ion-margin-bottom">
-        <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
-        <ion-input type="text" disabled>{{dueDate}}</ion-input>
-      </ion-item>
-      <div class="ion-text-center">
-        <ion-label>Responsable</ion-label>
-      </div>
-      <ion-item class="ion-margin-bottom">
-        <ion-icon name="person" slot="start" color="primary"></ion-icon>
-        <ion-input type="text" disabled>{{owner}}</ion-input>
-      </ion-item>
-      <div class="ion-text-center">
-        <ion-label>Estado</ion-label>
-      </div>
-      <ion-item class="ion-margin-bottom">
-        <!-- change to star-half if status is completed -->
-        <ion-icon name="star" slot="start" color="primary"></ion-icon>
-        <ion-input type="text" disabled>{{status}}</ion-input>
-      </ion-item>
-
-      <ion-button expand="block" color="success">Finalizar Tarea</ion-button>
-    </ion-card-content>
-  </ion-card>
+  <form [formGroup]="updateForm">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title class="ion-text-center ion-margin-bottom"
+          >{{description}}</ion-card-title
+        >
+        <ion-card-subtitle> </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <div class="ion-text-center">
+          <ion-label>Descripcion</ion-label>
+        </div>
+        <ion-item class="ion-margin-bottom">
+          <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+          <ion-input
+            type="text"
+            formControlName="description"
+            placeholder="{{getPlaceholderText('description')}}"
+          ></ion-input>
+        </ion-item>
+        <div class="ion-text-center">
+          <ion-label>Fecha de creacion</ion-label>
+        </div>
+        <ion-item class="ion-margin-bottom">
+          <ion-icon name="calendar" slot="start" color="primary"></ion-icon>
+          <ion-input type="text" disabled>{{createdDate}}</ion-input>
+        </ion-item>
+        <div class="ion-text-center">
+          <ion-label>Fecha de vencimiento</ion-label>
+        </div>
+        <ion-item id="due-date-modal" class="ion-margin-bottom">
+          <ion-datetime
+            #datetime
+            size="cover"
+            [min]="today"
+            presentation="date"
+            [value]="getFormattedDueDate()"
+            (ionChange)="dateSelected(datetime.value)"
+          >
+          </ion-datetime>
+        </ion-item>
+        <div class="ion-text-center">
+          <ion-label>Responsable</ion-label>
+        </div>
+        <ion-item class="ion-margin-bottom">
+          <ion-icon name="person" slot="start" color="primary"></ion-icon>
+          <ion-input type="text" disabled>{{owner}}</ion-input>
+        </ion-item>
+        <div class="ion-text-center">
+          <ion-label>Estado</ion-label>
+        </div>
+        <ion-item class="ion-margin-bottom">
+          <!-- change to star-half if status is completed -->
+          <ion-icon name="star" slot="start" color="primary"></ion-icon>
+          <ion-input type="text" disabled>{{status}}</ion-input>
+        </ion-item>
+        <ion-button expand="block" color="primary" class="ion-margin"
+          >Actualizar Tarea</ion-button
+        >
+        <ion-button expand="block" color="success" class="ion-margin"
+          >Finalizar Tarea</ion-button
+        >
+      </ion-card-content>
+    </ion-card>
+  </form>
   <div class="ion-margin">
-    <ion-button expand="block" color="danger" (click)="deleteTask()"
+    <ion-button
+      expand="block"
+      color="danger"
+      (click)="deleteTask()"
+      class="ion-margin"
       >Eliminar Tarea</ion-button
     >
   </div>
-  <div class="button-container ion-margin"></div>
 </ion-content>

@@ -74,7 +74,8 @@
 </ion-content>
 <ion-modal trigger="open-modal">
   <ng-template>
-    <ion-content [fullscreen]="false">
+    <!-- Check this behaviour.. when showing datetime inside a modal-->
+    <ion-content [fullscreen]="false" class="modal-content">
       <ion-datetime
         [min]="today"
         showDefaultButtons="true"
@@ -82,6 +83,7 @@
         doneText="Guardar"
         presentation="date"
         (ionCancel)="showDatetime = false;"
+        size="cover"
       >
       </ion-datetime>
     </ion-content>

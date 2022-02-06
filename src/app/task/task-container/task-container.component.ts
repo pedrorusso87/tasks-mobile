@@ -38,7 +38,7 @@ export class TaskContainerComponent implements OnInit {
     const extras: NavigationExtras = {
       queryParams: {
         createdDate: moment(task.createdDate).format('DD-MM-YYYY'),
-        dueDate: moment(task.createdDate).format('DD-MM-YYYY'),
+        dueDate: moment(task.dueDate).format('DD-MM-YYYY'),
         owner: task.responsible.username,
         description: task.description,
         status: task.status.description,

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
+import * as moment from 'moment';
 import { TaskActions } from '../store/actions';
 @Component({
   selector: 'app-task-detail',
@@ -16,21 +18,48 @@ export class TaskDetailPage implements OnInit {
   pending = true;
   status: string;
   taskId: string;
+  today = moment().format('YYYY-MM-DD');
+  updateForm = new FormGroup({});
 
   constructor(
     private route: ActivatedRoute,
     private alertController: AlertController,
-    private store: Store
+    private store: Store,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
+    this.loadTaksData();
+    this.initUpdateForm();
+    this.pending = false;
+  }
+
+  loadTaksData() {
     this.createdDate = this.route.snapshot.queryParamMap.get('createdDate');
     this.description = this.route.snapshot.queryParamMap.get('description');
     this.dueDate = this.route.snapshot.queryParamMap.get('dueDate');
     this.owner = this.route.snapshot.queryParamMap.get('owner');
     this.status = this.route.snapshot.queryParamMap.get('status');
     this.taskId = this.route.snapshot.queryParamMap.get('taskId');
-    this.pending = false;
+  }
+
+  initUpdateForm() {
+    this.updateForm = this.formBuilder.group({
+      dueDate: [this.dueDate, Validators.required],
+      responsible: [''],
+      status: [''],
+      priority: [''],
+      description: [this.description, Validators.required],
+    });
+  }
+
+  dateSelected(datetime) {
+    this.updateForm.get('dueDate').setValue(datetime);
+    console.log(this.updateForm.get('dueDate'));
+  }
+
+  getFormattedDueDate() {
+    return moment(this.getDueDate(), 'YYYY-MM-DD').format('YYYY-MM-DD');
   }
 
   async deleteTask() {
@@ -56,5 +85,27 @@ export class TaskDetailPage implements OnInit {
       ],
     });
     await alert.present();
+  }
+
+  getPlaceholderText(controlName: string) {
+    return this.updateForm.get(controlName).errors?.required
+      ? 'Campo Requerido'
+      : null;
+  }
+
+  getDescription(): string {
+    return this.updateForm.get('description').value;
+  }
+  getDueDate(): string {
+    return this.updateForm.get('dueDate').value;
+  }
+  getResponsible(): string {
+    return this.updateForm.get('responsible').value;
+  }
+  getStatus(): string {
+    return this.updateForm.get('status').value;
+  }
+  getPriority(): string {
+    return this.updateForm.get('priority').value;
   }
 }

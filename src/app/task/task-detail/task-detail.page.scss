@@ -1,10 +1,17 @@
 ion-toolbar {
   background-color: red;
 }
+
 .button-container {
   display: flex;
   justify-content: space-between;
 }
+
 .ion-title {
   margin-right: 60px;
+}
+
+.datetime {
+  display: flex;
+  justify-content: flex-end;
 }
