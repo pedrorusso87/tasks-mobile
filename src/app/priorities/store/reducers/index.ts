@@ -23,7 +23,6 @@ const priorityState = createFeatureSelector<PriorityState>('priorities');
 export const selectPrioritiesState = createSelector(
   priorityState,
   (state: PriorityState) => {
-    console.log(state);
     return state.prioritiesState;
   }
 );

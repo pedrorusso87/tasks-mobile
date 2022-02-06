@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
+import { PrioritiesActions } from 'src/app/priorities/store/actions';
 import { Task } from 'src/app/services/task-service';
 import * as fromTasks from '../../task/store/index';
 @Component({
@@ -35,6 +36,7 @@ export class TaskContainerComponent implements OnInit {
 
   onTaskClicked(task) {
     console.log(task);
+    this.store.dispatch(PrioritiesActions.GetPriorities());
     const extras: NavigationExtras = {
       queryParams: {
         createdDate: moment(task.createdDate).format('DD-MM-YYYY'),
