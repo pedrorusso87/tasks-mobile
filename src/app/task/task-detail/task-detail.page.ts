@@ -18,6 +18,9 @@ const ARROW_UP_ICON = 'arrow-up';
 const ARROW_DOWN_ICON = 'arrow-down';
 const ARROW_MEDIUM_ICON = 'arrow-forward';
 const ARROW_DEFAULT_ICON = 'remove-circle';
+
+const STAR = 'star';
+const STAR_HALF = 'star-half';
 @Component({
   selector: 'app-task-detail',
   templateUrl: './task-detail.page.html',
@@ -107,6 +110,14 @@ export class TaskDetailPage implements OnInit {
       default:
         return ARROW_DEFAULT_ICON;
     }
+  }
+
+  getStatusIconName(): string {
+    return this.taskDetails.status === 'PENDIENTE' ? STAR_HALF : STAR;
+  }
+
+  getTaskStatusIconColor(): string {
+    return this.taskDetails.status === 'CANCELADA' ? 'danger' : 'primary';
   }
 
   async deleteTask() {
