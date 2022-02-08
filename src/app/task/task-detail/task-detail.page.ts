@@ -11,6 +11,8 @@ import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { TaskActions } from '../store/actions';
 import * as fromPriorities from '../../priorities/store';
+import * as fromTaskStatus from '../../task/store';
+import { TaskDetailsParams } from '../models/task-model';
 
 const ARROW_UP_ICON = 'arrow-up';
 const ARROW_DOWN_ICON = 'arrow-down';
@@ -23,19 +25,12 @@ const ARROW_DEFAULT_ICON = 'remove-circle';
 })
 export class TaskDetailPage implements OnInit {
   getPriorities$ = this.store.select(fromPriorities.selectGetPriorities);
-
-  createdDate: string;
-  dueDate: string;
-  owner: string;
-  description: string;
+  getTaskStatuses$ = this.store.select(fromTaskStatus.selectGetTasksStatus);
+  params;
   pending = true;
-  status: string;
-  taskId: string;
-  priority: string;
   today = moment().format('YYYY-MM-DD');
   updateForm = new FormGroup({});
-  priorities;
-  currentPriority;
+  taskDetails = {} as TaskDetailsParams;
   constructor(
     private route: ActivatedRoute,
     private alertController: AlertController,
@@ -44,10 +39,8 @@ export class TaskDetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getPriorities$.subscribe((priorities) => {
-      if (priorities) {
-        this.priorities = priorities;
-      }
+    this.getTaskStatuses$.subscribe((status) => {
+      console.log(status);
     });
     this.loadTaksData();
     this.initUpdateForm();
@@ -55,22 +48,32 @@ export class TaskDetailPage implements OnInit {
   }
 
   loadTaksData() {
-    this.createdDate = this.route.snapshot.queryParamMap.get('createdDate');
-    this.description = this.route.snapshot.queryParamMap.get('description');
-    this.dueDate = this.route.snapshot.queryParamMap.get('dueDate');
-    this.owner = this.route.snapshot.queryParamMap.get('owner');
-    this.status = this.route.snapshot.queryParamMap.get('status');
-    this.taskId = this.route.snapshot.queryParamMap.get('taskId');
-    this.priority = this.route.snapshot.queryParamMap.get('priority');
+    this.params = this.route.snapshot.queryParamMap;
+    const {
+      createdDate,
+      description,
+      dueDate,
+      owner,
+      status,
+      taskId,
+      priority,
+    } = this.params.params;
+    this.taskDetails.description = description;
+    this.taskDetails.createdDate = createdDate;
+    this.taskDetails.dueDate = dueDate;
+    this.taskDetails.owner = owner;
+    this.taskDetails.status = status;
+    this.taskDetails.taskId = taskId;
+    this.taskDetails.priority = priority;
   }
 
   initUpdateForm() {
     this.updateForm = this.formBuilder.group({
-      dueDate: [this.dueDate, Validators.required],
+      dueDate: [this.taskDetails.dueDate, Validators.required],
       responsible: [''],
-      status: [''],
+      status: [this.taskDetails.status],
       priority: [''],
-      description: [this.description, Validators.required],
+      description: [this.taskDetails.description, Validators.required],
     });
   }
 
@@ -94,7 +97,7 @@ export class TaskDetailPage implements OnInit {
   }
 
   getPriorityIconName(): string {
-    switch (this.priority) {
+    switch (this.taskDetails.priority) {
       case 'ALTA':
         return ARROW_UP_ICON;
       case 'MEDIA':
@@ -122,7 +125,7 @@ export class TaskDetailPage implements OnInit {
           handler: () => {
             // TODO: This is just a test, in the future we might not want to pass the id of the task
             this.store.dispatch(
-              TaskActions.DeleteTask({ payload: this.taskId })
+              TaskActions.DeleteTask({ payload: this.taskDetails.taskId })
             );
           },
         },

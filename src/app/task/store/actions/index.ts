@@ -1,3 +1,3 @@
 import * as TaskActions from './task-actions';
-
-export { TaskActions };
+import * as TaskStatusActions from './task-status-actions';
+export { TaskActions, TaskStatusActions };

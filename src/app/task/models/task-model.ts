@@ -7,3 +7,13 @@ export class AddTaskRequest {
   dueDate?: Date;
   createdDate: Date;
 }
+
+export class TaskDetailsParams {
+  createdDate: Date;
+  description: string;
+  dueDate: Date;
+  owner: string;
+  status: string;
+  taskId: string;
+  priority: string;
+}

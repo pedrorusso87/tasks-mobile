@@ -12,7 +12,7 @@
     <ion-card>
       <ion-card-header>
         <ion-card-title class="ion-text-center ion-margin-bottom"
-          >{{description}}</ion-card-title
+          >{{taskDetails.description}}</ion-card-title
         >
         <ion-card-subtitle> </ion-card-subtitle>
       </ion-card-header>
@@ -48,35 +48,38 @@
         </div>
         <ion-item class="ion-margin-bottom">
           <ion-icon name="person" slot="start" color="primary"></ion-icon>
-          <ion-input type="text" disabled>{{owner}}</ion-input>
+          <ion-input type="text" disabled>{{taskDetails.owner}}</ion-input>
         </ion-item>
-        <ion-item *ngIf="priorities">
+        <ion-item>
           <ion-icon
             name="{{getPriorityIconName()}}"
             slot="start"
             color="primary"
           ></ion-icon>
           <ion-label>Prioridad</ion-label>
-          <ion-select formControlName="priority" [(ngModel)]="priority">
+          <ion-select
+            formControlName="priority"
+            [(ngModel)]="taskDetails.priority"
+          >
             <ion-select-option
-              *ngFor="let priority of priorities"
+              *ngFor="let priority of getPriorities$ | async"
               value="{{priority.description}}"
             >
               {{priority.description}}
             </ion-select-option>
           </ion-select>
         </ion-item>
-        <div class="ion-text-center">
+        <ion-item>
+          <ion-icon name="star" slot="start" color="primary"></ion-icon>
           <ion-label>Estado</ion-label>
-        </div>
-        <ion-item class="ion-margin-bottom">
-          <!-- change to star-half if status is completed -->
-          <ion-icon
-            name="star"
-            slot="start"
-            color="{{getIconColor()}}"
-          ></ion-icon>
-          <ion-input type="text" disabled>{{status}}</ion-input>
+          <ion-select formControlName="status" [(ngModel)]="taskDetails.status">
+            <ion-select-option
+              *ngFor="let status of getTaskStatuses$ | async"
+              value="{{status.description}}"
+            >
+              {{status.description}}
+            </ion-select-option>
+          </ion-select>
         </ion-item>
         <ion-button
           expand="block"

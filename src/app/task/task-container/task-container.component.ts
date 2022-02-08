@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import { PrioritiesActions } from 'src/app/priorities/store/actions';
 import { Task } from 'src/app/services/task-service';
 import * as fromTasks from '../../task/store/index';
+import { TaskStatusActions } from '../store/actions';
 @Component({
   selector: 'app-task-container',
   templateUrl: './task-container.component.html',
@@ -37,6 +38,7 @@ export class TaskContainerComponent implements OnInit {
   onTaskClicked(task) {
     console.log(task);
     this.store.dispatch(PrioritiesActions.GetPriorities());
+    this.store.dispatch(TaskStatusActions.getTasksStatus());
     const extras: NavigationExtras = {
       queryParams: {
         createdDate: moment(task.createdDate).format('DD-MM-YYYY'),
