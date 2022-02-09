@@ -13,14 +13,14 @@ const routes: Routes = [
   {
     path: 'tasks',
     component: TaskPage,
+    loadChildren: () => import('./task/task.module').then((m) => m.TaskModule),
   },
   {
-    path: 'task-detail',
-    component: TaskDetailPage,
-  },
-  {
-    path: 'new-task',
-    component: AddTaskPage,
+    path: 'dashboards',
+    loadChildren: () =>
+      import('./dashboard/dashboard-home/dashboard-home.module').then(
+        (m) => m.DashboardHomePageModule
+      ),
   },
 ];
 

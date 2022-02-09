@@ -29,7 +29,7 @@ defineGlobalsInjections({
     provideMockStore({
       initialState: {
         tasks: {
-          tasksState: {
+          tasks: {
             pending: {
               getTasks: false,
               addTask: false,
@@ -37,6 +37,11 @@ defineGlobalsInjections({
             },
             error: {},
             tasks: [],
+          },
+          statuses: {
+            pending: false,
+            error: null,
+            tasksStatus: [],
           },
         },
         priorities: {

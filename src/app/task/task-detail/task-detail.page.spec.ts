@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
 import { createComponentFactory, Spectator } from '@ngneat/spectator';
 import { MockStore } from '@ngrx/store/testing';
 import * as fromTasks from 'src/app/task/store/reducers';
@@ -13,6 +14,7 @@ describe('TaskDetailPage', () => {
   const createComponent = createComponentFactory({
     component: TaskDetailPage,
     declarations: [TaskDetailPage],
+    providers: [FormBuilder],
   });
 
   beforeEach(() => {

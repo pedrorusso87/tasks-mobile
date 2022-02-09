@@ -12,8 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { TaskModule } from './task/task.module';
 import { PrioritiesModule } from './priorities/priorities.module';
-//import { TaskContainerModule } from './task/task-container/task-container.module';
-
+import { DashboardModule } from './dashboard/dashboard.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -27,6 +26,7 @@ import { PrioritiesModule } from './priorities/priorities.module';
     EffectsModule.forRoot([]),
     PrioritiesModule,
     TaskModule,
+    DashboardModule,
     StoreDevtoolsModule.instrument({
       maxAge: 20,
     }),

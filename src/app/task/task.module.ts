@@ -10,6 +10,7 @@ import TaskStatusEffects from './store/effects/task-status-effects';
 import * as fromTask from './store/reducers';
 import { TaskContainerComponent } from './task-container/task-container.component';
 import { TaskDetailPage } from './task-detail/task-detail.page';
+import { TaskPageRoutingModule } from './task-page/task-routing.module';
 import { TaskPage } from './task-page/task.page';
 @NgModule({
   declarations: [AddTaskPage, TaskContainerComponent, TaskDetailPage, TaskPage],
@@ -19,6 +20,7 @@ import { TaskPage } from './task-page/task.page';
     ReactiveFormsModule,
     StoreModule.forFeature('tasks', fromTask.reducers),
     EffectsModule.forFeature([TaskEffects, TaskStatusEffects]),
+    TaskPageRoutingModule,
   ],
 })
 export class TaskModule {}
