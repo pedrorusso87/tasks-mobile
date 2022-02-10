@@ -1,4 +1,4 @@
-import { Action, createAction, props } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 import { Task } from 'src/app/services/task-service';
 import { AddTaskRequest } from '../../models/task-model';
 
