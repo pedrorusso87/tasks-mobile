@@ -15,7 +15,7 @@ export const getUserDashboards = createAction(
 
 export const getUserDashboardsSuccess = createAction(
   GET_USER_DASHBOARDS_SUCCESS,
-  props<{ userDashboards: UserDashboardsResponse[] }>()
+  props<{ userDashboards: UserDashboardsResponse }>()
 );
 
 export const getUserDashboardsFailed = createAction(

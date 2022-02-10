@@ -16,6 +16,9 @@
       </p>
     </ion-card-content>
   </ion-card>
-  <app-dashboard-container></app-dashboard-container>
+  <app-dashboard-container
+    *ngIf="userDashboards"
+    [dashboardList]="userDashboards"
+  ></app-dashboard-container>
   <!-- List here all the dashboards for the user -->
 </ion-content>

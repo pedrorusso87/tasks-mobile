@@ -6,9 +6,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-container.component.scss'],
 })
 export class DashboardContainerComponent implements OnInit {
-  @Input() dashboardList = ['1', '2', '3'];
+  @Input() dashboardList;
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.dashboardList);
+  }
 }

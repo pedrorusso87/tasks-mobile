@@ -1,24 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DashboardActions } from '../store/actions';
 import * as fromDashboards from '../store';
+import { Subscription } from 'rxjs';
+import {
+  DashboardInformation,
+  UserDashboardsResponse,
+} from '../models/dashboard-model';
 @Component({
   selector: 'app-dashboard-home',
   templateUrl: './dashboard-home.page.html',
   styleUrls: ['./dashboard-home.page.scss'],
 })
-export class DashboardHomePage implements OnInit {
+export class DashboardHomePage implements OnInit, OnDestroy {
   getUserDashboards$ = this.store.select(fromDashboards.selectUserDashboards);
+  getUserDashboardsSubscription: Subscription;
   getUserDashboardsPending$ = this.store.select(
     fromDashboards.selectUserDashboardsPending
   );
+  userDashboards: DashboardInformation[];
   constructor(private store: Store) {}
 
   ngOnInit() {
     const userId = '6';
     this.store.dispatch(DashboardActions.getUserDashboards({ userId }));
-    this.getUserDashboardsPending$.subscribe((pending) => {
-      console.log(pending);
-    });
+    this.getUserDashboardsSubscription = this.getUserDashboards$.subscribe(
+      (dashboardsResponse) => {
+        if (dashboardsResponse) {
+          this.userDashboards = dashboardsResponse.dashboards;
+        }
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.getUserDashboardsSubscription.unsubscribe();
   }
 }

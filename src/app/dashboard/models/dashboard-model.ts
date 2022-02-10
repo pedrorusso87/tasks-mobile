@@ -1,7 +1,9 @@
 export class UserDashboardsResponse {
-  dashboard: {
-    name: string;
-    createdDate: string;
-    modifiedDate: string;
-  };
+  dashboards: DashboardInformation[];
+}
+
+export class DashboardInformation {
+  name: string;
+  createdDate: string;
+  modifiedDate: string;
 }

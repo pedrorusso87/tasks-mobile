@@ -5,7 +5,9 @@
     </ion-card-header>
     <ion-card-content>
       <ion-list class="ion-no-padding">
-        <ion-item *ngFor="let d of dashboardList"> </ion-item>
+        <ion-item *ngFor="let dashboard of dashboardList" button>
+          {{ dashboard.name }}
+        </ion-item>
       </ion-list>
     </ion-card-content>
     <ion-button expand="block" color="success">Nuevo Tablero</ion-button>

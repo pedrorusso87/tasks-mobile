@@ -5,7 +5,7 @@ import { DashboardActions } from '../actions';
 export interface State {
   pending: boolean;
   error: null;
-  userDashboards: UserDashboardsResponse[];
+  userDashboards: UserDashboardsResponse;
 }
 
 const initialState: State = {
