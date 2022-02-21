@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskModule } from './task/task.module';
 import { PrioritiesModule } from './priorities/priorities.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -31,6 +32,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
       maxAge: 20,
     }),
     HttpClientModule,
+    AuthModule,
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
