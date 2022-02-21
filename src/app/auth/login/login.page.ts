@@ -8,7 +8,9 @@ import {
 import { Store } from '@ngrx/store';
 import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import * as fromLogin from '../store';
+import { LoginActions } from '../store/actions';
+import { UserLoginRequest } from '../models/login-models';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -40,11 +42,12 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   login() {
-    const loginRequest = {
-      username: this.getEmail(),
-      password: this.getPassword(),
-    };
-    // this.store.dispatch(new fromLogin.LoginUser(loginRequest));
+    this.store.dispatch(
+      LoginActions.login({
+        username: this.getEmail(),
+        password: this.getPassword(),
+      })
+    );
     this.presentLoading();
   }
 

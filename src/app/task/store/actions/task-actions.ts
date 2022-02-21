@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { Task } from 'src/app/services/task-service';
-import { AddTaskRequest } from '../../models/task-model';
+import { AddTaskRequest } from '../../../task/models/task-model';
 
 //Tasks actions GET Tasks
 export const GET_TASKS = '[TASKS] get tasks';
