@@ -56,13 +56,20 @@
           >
         </ion-select>
       </ion-item>
-      <ion-item id="open-modal" class="ion-padding-bottom" lines="none">
-        <ion-icon
-          icon="calendar-outline"
-          slot="start"
-          color="medium"
-        ></ion-icon>
-        <ion-label>Fecha de Finalizacion</ion-label>
+      <div class="ion-text-center ion-margin-top">
+        <ion-label>Fecha de vencimiento</ion-label>
+      </div>
+        <ion-item class="">
+        <ion-datetime
+        [min]="today"
+        showDefaultButtons="false"
+        cancelText="Salir"
+        doneText="Guardar"
+        presentation="date"
+        (ionCancel)="showDatetime = false;"
+        size="cover"
+        >
+        </ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="stacked">Notas Adicionales</ion-label>
