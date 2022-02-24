@@ -69,7 +69,6 @@ export class LoginPage implements OnInit, OnDestroy {
   dismissModal() {
     this.getUserPendingSubscription = this.getUserPending$.subscribe(pending => {
       if(!pending) {
-        console.log(pending);
         this.getUserSubscription = this.getUser$.subscribe(user => {
           if(user) {
             this.loadingController.dismiss();
@@ -114,5 +113,6 @@ export class LoginPage implements OnInit, OnDestroy {
     } else {
       this.errorMessage = 'Hubo un error al procesar la solicitud';
     }
+    this.loginForm.get('password').setValue('');
   }
 }

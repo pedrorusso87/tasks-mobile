@@ -42,9 +42,6 @@ export class TaskDetailPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getTaskStatuses$.subscribe((status) => {
-      console.log(status);
-    });
     this.loadTaksData();
     this.initUpdateForm();
     this.pending = false;
