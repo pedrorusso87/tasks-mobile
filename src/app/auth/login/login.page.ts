@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -10,13 +10,13 @@ import { LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import * as fromLogin from '../store';
 import { LoginActions } from '../store/actions';
-import { UserLoginRequest } from '../models/login-models';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   @ViewChild('passwordEyeRegister') passwordEye;
   loginError = false;
   errorMessage: string;
@@ -26,6 +26,12 @@ export class LoginPage implements OnInit {
   password = new FormControl('', Validators.required);
   passwordTypeInput = 'password';
   passwordIcon = 'eye-off';
+  getUserSubscription: Subscription;
+  getUserPendingSubscription: Subscription;
+  getUserLoginErrorSubscription: Subscription;
+  getUser$ = this.store.select(fromLogin.selectLoginSuccess);
+  getUserPending$ = this.store.select(fromLogin.selectLoginUserPending);
+  getUserLoginError$ = this.store.select(fromLogin.selectLoginError);
 
   constructor(
     private fb: FormBuilder,
@@ -57,6 +63,28 @@ export class LoginPage implements OnInit {
       id: 'loading-controller',
     });
     await loading.present();
+    this.dismissModal();
+  }
+
+  dismissModal() {
+    this.getUserPendingSubscription = this.getUserPending$.subscribe(pending => {
+      if(!pending) {
+        console.log(pending);
+        this.getUserSubscription = this.getUser$.subscribe(user => {
+          if(user) {
+            this.loadingController.dismiss();
+            this.router.navigate(['tasks']);
+
+          } else {
+            this.loginError = true;
+            this.getUserLoginErrorSubscription = this.getUserLoginError$.subscribe(error => {
+              this.setErrorMessage(error);
+            });
+          }
+          this.loadingController.dismiss();
+        });
+      }
+    });
   }
 
   togglePasswordMode() {
@@ -72,6 +100,12 @@ export class LoginPage implements OnInit {
 
   getPassword(): any {
     return this.loginForm.get('password')?.value;
+  }
+
+  ngOnDestroy(): void {
+    this.getUserPendingSubscription.unsubscribe();
+    this.getUserSubscription.unsubscribe();
+    this.getUserLoginErrorSubscription.unsubscribe();
   }
 
   private setErrorMessage(error: any): void {

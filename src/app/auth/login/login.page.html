@@ -21,6 +21,7 @@
           </p>
         </ion-card-header>
         <ion-card-content>
+          <div [ngClass]="!loginError ? 'success-login' : 'error-login'">
           <ion-item lines="none">
             <ion-label position="stacked">Usuario</ion-label>
             <ion-input
@@ -51,11 +52,14 @@
               </ion-icon>
             </span>
           </ion-item>
+
+        </div>
           <ion-button
+            class="ion-margin-top"
             (click)="login()"
             expand="block"
             [disabled]="!this.loginForm.valid"
-            >ingresar</ion-button
+            >Ingresar</ion-button
           >
           <p class="ion-padding-top">
             ¿No tienes cuenta? <a routerLink="/register">Regístrate</a>

@@ -5,6 +5,12 @@ ion-icon {
   padding: 0px 7px 12px 0px;
 }
 
+.error-login {
+  border-style: solid;
+  border-color: red;
+  border-width: 1px;
+}
+
 .error-text {
   color: red;
   font-size: small;
