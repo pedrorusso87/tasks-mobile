@@ -1,4 +1,5 @@
 import LoginEffects from './login-effects';
-
-export const effects: any[] = [LoginEffects];
+import RegisterEffects from './register-effects';
+export const effects: any[] = [LoginEffects, RegisterEffects];
 export * from './login-effects';
+export * from './register-effects';

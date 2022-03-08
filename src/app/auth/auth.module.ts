@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -7,6 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { LoginPage } from './login/login.page';
 import LoginEffects from './store/effects/login-effects';
+import RegisterEffects from './store/effects/register-effects';
 import * as fromAuth from './store/reducers';
 @NgModule({
   imports: [
@@ -17,7 +18,7 @@ import * as fromAuth from './store/reducers';
     FormsModule,
     ReactiveFormsModule,
     StoreModule.forFeature('auth', fromAuth.reducers),
-    EffectsModule.forFeature([LoginEffects]),
+    EffectsModule.forFeature([LoginEffects, RegisterEffects]),
   ],
   declarations: [LoginPage],
 })

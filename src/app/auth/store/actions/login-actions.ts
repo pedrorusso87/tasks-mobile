@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserLoginRequest, UserLoginResponse } from '../../models/login-models';
+import { UserLoginResponse } from '../../models/login-models';
 
 //Login actions
 export const LOGIN = '[LOGIN] user login';

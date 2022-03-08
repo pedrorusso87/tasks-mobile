@@ -1,2 +1,3 @@
 import * as LoginActions from './login-actions';
-export { LoginActions };
+import * as RegisterActions from './register-actions';
+export { LoginActions, RegisterActions };
