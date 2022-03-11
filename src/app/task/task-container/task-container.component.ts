@@ -36,7 +36,6 @@ export class TaskContainerComponent implements OnInit {
   }
 
   onTaskClicked(task) {
-    console.log(task);
     this.store.dispatch(PrioritiesActions.GetPriorities());
     this.store.dispatch(TaskStatusActions.getTasksStatus());
     const extras: NavigationExtras = {
@@ -48,6 +47,7 @@ export class TaskContainerComponent implements OnInit {
         status: task.status.description,
         priority: task.priority.description,
         taskId: task.id,
+        dashboardName: task.dashboard.name,
       },
     };
     this.router.navigate(['/task-detail'], extras);

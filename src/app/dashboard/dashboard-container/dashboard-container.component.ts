@@ -10,7 +10,5 @@ export class DashboardContainerComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.dashboardList);
-  }
+  ngOnInit() {}
 }

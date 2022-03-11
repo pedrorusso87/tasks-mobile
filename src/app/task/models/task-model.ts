@@ -16,4 +16,5 @@ export class TaskDetailsParams {
   status: string;
   taskId: string;
   priority: string;
+  dashboardName: string;
 }

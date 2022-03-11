@@ -29,7 +29,7 @@ const STAR_HALF = 'star-half';
 export class TaskDetailPage implements OnInit {
   getPriorities$ = this.store.select(fromPriorities.selectGetPriorities);
   getTaskStatuses$ = this.store.select(fromTaskStatus.selectGetTasksStatus);
-  params;
+  taskParams;
   pending = true;
   today = moment().format('YYYY-MM-DD');
   updateForm = new FormGroup({});
@@ -48,7 +48,7 @@ export class TaskDetailPage implements OnInit {
   }
 
   loadTaksData() {
-    this.params = this.route.snapshot.queryParamMap;
+    this.taskParams = this.route.snapshot.queryParamMap;
     const {
       createdDate,
       description,
@@ -57,7 +57,8 @@ export class TaskDetailPage implements OnInit {
       status,
       taskId,
       priority,
-    } = this.params.params;
+      dashboardName,
+    } = this.taskParams.params;
     this.taskDetails.description = description;
     this.taskDetails.createdDate = createdDate;
     this.taskDetails.dueDate = dueDate;
@@ -65,6 +66,7 @@ export class TaskDetailPage implements OnInit {
     this.taskDetails.status = status;
     this.taskDetails.taskId = taskId;
     this.taskDetails.priority = priority;
+    this.taskDetails.dashboardName = dashboardName;
   }
 
   initUpdateForm() {
@@ -74,6 +76,7 @@ export class TaskDetailPage implements OnInit {
       status: [this.taskDetails.status],
       priority: [''],
       description: [this.taskDetails.description, Validators.required],
+      dashboardName: [this.taskDetails.dashboardName, Validators.required],
     });
   }
 
@@ -162,5 +165,8 @@ export class TaskDetailPage implements OnInit {
   }
   getPriority(): string {
     return this.updateForm.get('priority').value;
+  }
+  getDashboardName(): string {
+    return this.updateForm.get('dashboardName').value;
   }
 }

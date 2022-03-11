@@ -6,7 +6,8 @@
     <ion-card-content>
       <ion-list class="ion-no-padding">
         <ion-item *ngFor="let dashboard of dashboardList" button>
-          {{ dashboard.name }}
+          <ion-icon ios="clipboard-outline" md="clipboard-outline"></ion-icon>
+          {{ dashboard.name | titlecase }}
         </ion-item>
       </ion-list>
     </ion-card-content>
