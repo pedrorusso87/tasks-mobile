@@ -11,7 +11,7 @@ export default class DashboardEffects {
     this.actions$.pipe(
       ofType(DashboardActions.GET_USER_DASHBOARDS),
       switchMap((action: any) =>
-        this.dashboardService.getUserDashboards(action.userId).pipe(
+        this.dashboardService.getUserDashboards(action.username).pipe(
           map((response) =>
             DashboardActions.getUserDashboardsSuccess({
               userDashboards: response,

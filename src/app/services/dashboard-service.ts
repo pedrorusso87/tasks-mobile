@@ -10,7 +10,7 @@ export class DashboardService {
   private url = environment.API_URL;
   constructor(private httpClient: HttpClient) {}
 
-  public getUserDashboards(userId: string): Observable<any> {
-    return this.httpClient.get(`${this.url}/dashboards/user/${userId}`);
+  public getUserDashboards(username: string): Observable<any> {
+    return this.httpClient.get(`${this.url}/dashboards/username/${username}`);
   }
 }

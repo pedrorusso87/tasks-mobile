@@ -10,7 +10,7 @@ export const GET_USER_DASHBOARDS_FAILED =
 
 export const getUserDashboards = createAction(
   GET_USER_DASHBOARDS,
-  props<{ userId: string }>()
+  props<{ username: string }>()
 );
 
 export const getUserDashboardsSuccess = createAction(

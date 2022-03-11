@@ -22,8 +22,8 @@ export class DashboardHomePage implements OnInit, OnDestroy {
   constructor(private store: Store) {}
 
   ngOnInit() {
-    const userId = '6';
-    this.store.dispatch(DashboardActions.getUserDashboards({ userId }));
+    const username = 'user';
+    this.store.dispatch(DashboardActions.getUserDashboards({ username }));
     this.getUserDashboardsSubscription = this.getUserDashboards$.subscribe(
       (dashboardsResponse) => {
         if (dashboardsResponse) {

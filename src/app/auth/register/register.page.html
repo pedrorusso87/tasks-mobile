@@ -14,9 +14,7 @@
     >
       <ion-card [formGroup]="registerForm">
         <ion-card-header>
-          <ion-card-title class="ion-text-center"
-            >{{'crear cuenta'}}</ion-card-title
-          >
+          <ion-card-title class="ion-text-center">Crear Cuenta</ion-card-title>
           <p class="ion-text-center error-text" *ngIf="registerError">
             {{errorMessage}}
           </p>
@@ -85,7 +83,6 @@
             >Las contraseñas deben coincidir
           </ion-label>
           <ion-button
-            [disabled]="!this.registerForm.valid"
             expand="block"
             (click)="register()"
             class="ion-margin-top"
